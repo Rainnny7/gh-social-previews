@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 import { Octokit } from "octokit";
 import { ReactElement, ReactNode } from "react";
 import { IoStarOutline } from "react-icons/io5";
-import { cn } from "@/lib/utils";
 import { GoIssueOpened, GoRepoForked } from "react-icons/go";
 
 const octokit = new Octokit({
@@ -71,18 +70,15 @@ export const GET = async (
                     {withStats && (
                         <div tw="flex items-center">
                             <Stat
-                                className="text-yellow-500"
-                                icon={<IoStarOutline />}
+                                icon={<IoStarOutline size={24} />}
                                 value={ghRepository?.stargazers_count}
                             />
                             <Stat
-                                className="text-red-500"
-                                icon={<GoIssueOpened />}
+                                icon={<GoIssueOpened size={24} />}
                                 value={ghRepository?.open_issues_count}
                             />
                             <Stat
-                                className="text-blue-500"
-                                icon={<GoRepoForked />}
+                                icon={<GoRepoForked size={24} />}
                                 value={ghRepository?.forks_count}
                             />
                         </div>
@@ -98,16 +94,14 @@ export const GET = async (
 };
 
 const Stat = ({
-    className,
     icon,
     value,
 }: {
-    className?: string;
     icon: ReactNode;
     value: string;
 }): ReactElement => (
     <div tw="px-2 flex flex-col items-center">
-        <div tw={cn("flex pb-0.5", className)}>{icon}</div>
+        <div tw="flex pb-1.5">{icon}</div>
         <span className="opacity-75">{value}</span>
     </div>
 );
