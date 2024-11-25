@@ -17,11 +17,11 @@ export const GET = async (
     const { searchParams } = new URL(request.url);
     const withStats: boolean =
         searchParams.has("stats") && searchParams.get("stats") === "true";
+    const isDark: boolean =
+        !searchParams.has("dark") || searchParams.get("dark") !== "false";
     const transparentBackground: boolean =
         searchParams.has("transparent") &&
         searchParams.get("transparent") === "true";
-    const isDark: boolean =
-        !searchParams.has("dark") || searchParams.get("dark") !== "false";
 
     // Validate the given input prior to making the request
     if (!owner || !repo || owner.length === 0 || repo.length === 0) {
