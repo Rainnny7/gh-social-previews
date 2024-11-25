@@ -3,6 +3,7 @@ import { Octokit } from "octokit";
 import { ReactElement, ReactNode } from "react";
 import { IoStarOutline } from "react-icons/io5";
 import { GoIssueOpened, GoRepoForked } from "react-icons/go";
+import { cn } from "@/lib/utils";
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -16,6 +17,8 @@ export const GET = async (
     const { searchParams } = new URL(request.url);
     const withStats: boolean =
         searchParams.has("stats") && searchParams.get("stats") === "true";
+    const darkTheme: boolean =
+        searchParams.has("dark") && searchParams.get("dark") !== "false";
 
     // Validate the given input prior to making the request
     if (!owner || !repo || owner.length === 0 || repo.length === 0) {
@@ -44,7 +47,12 @@ export const GET = async (
     // Return the rendered image
     return new ImageResponse(
         (
-            <div tw="p-[3.333rem] w-full h-full flex flex-col justify-center bg-black/95 text-white">
+            <div
+                tw={cn(
+                    "p-[3.333rem] w-full h-full flex flex-col justify-center",
+                    darkTheme && "bg-black/95 text-white"
+                )}
+            >
                 {/* Repository Name & Description */}
                 <div tw="flex flex-col">
                     <h1 tw="text-6xl font-bold leading-[5px]">
