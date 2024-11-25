@@ -149,6 +149,8 @@ const MediaPreview = ({
                             <Link
                                 className="text-sm text-blue-500 hover:opacity-75 transition-all transform-gpu"
                                 href={previewSource}
+                                target="_blank"
+                                draggable={false}
                             >
                                 {process.env.NEXT_PUBLIC_APP_URL}
                                 {previewSource}

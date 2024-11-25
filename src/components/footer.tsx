@@ -10,6 +10,8 @@ const Footer = (): ReactElement => (
             <Link
                 className="text-blue-500 hover:opacity-75 transition-all transform-gpu"
                 href="https://github.com/Rainnny7"
+                target="_blank"
+                draggable={false}
             >
                 Rainnny
             </Link>
@@ -19,6 +21,8 @@ const Footer = (): ReactElement => (
         <Link
             className="hover:opacity-75 transition-all transform-gpu"
             href="https://github.com/Rainnny7/gh-social-previews"
+            target="_blank"
+            draggable={false}
         >
             <SlSocialGithub className="size-6" />
         </Link>
