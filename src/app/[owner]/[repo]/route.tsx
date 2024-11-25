@@ -17,6 +17,9 @@ export const GET = async (
     const { searchParams } = new URL(request.url);
     const withStats: boolean =
         searchParams.has("stats") && searchParams.get("stats") === "true";
+    const transparentBackground: boolean =
+        searchParams.has("transparent") &&
+        searchParams.get("transparent") === "true";
     const isDark: boolean =
         !searchParams.has("dark") || searchParams.get("dark") !== "false";
 
@@ -50,7 +53,8 @@ export const GET = async (
             <div
                 tw={cn(
                     "p-[3.333rem] w-full h-full flex flex-col justify-center",
-                    isDark && "bg-black/95 text-white"
+                    isDark ? "bg-black/95 text-white" : "bg-white/95",
+                    transparentBackground && "bg-transparent"
                 )}
             >
                 {/* Repository Name & Description */}
