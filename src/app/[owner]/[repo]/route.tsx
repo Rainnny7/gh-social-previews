@@ -74,23 +74,23 @@ export const GET = async (
                         tw="rounded-full"
                         src={ghRepository?.owner.avatar_url}
                         alt={`Avatar of ${ghRepository?.owner.login}`}
-                        width={72}
-                        height={72}
+                        width={86}
+                        height={86}
                     />
 
                     {/* Stats */}
                     {withStats && (
                         <div tw="flex items-center">
                             <Stat
-                                icon={<IoStarOutline size={24} />}
+                                icon={<IoStarOutline size={28} />}
                                 value={ghRepository?.stargazers_count}
                             />
                             <Stat
-                                icon={<GoIssueOpened size={24} />}
+                                icon={<GoIssueOpened size={28} />}
                                 value={ghRepository?.open_issues_count}
                             />
                             <Stat
-                                icon={<GoRepoForked size={24} />}
+                                icon={<GoRepoForked size={28} />}
                                 value={ghRepository?.forks_count}
                             />
                         </div>
@@ -114,6 +114,6 @@ const Stat = ({
 }): ReactElement => (
     <div tw="px-2 flex flex-col items-center">
         <div tw="flex pb-1.5">{icon}</div>
-        <span className="opacity-75">{value}</span>
+        <span className="text-xl opacity-75">{value}</span>
     </div>
 );
