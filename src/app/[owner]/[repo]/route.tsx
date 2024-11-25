@@ -9,8 +9,6 @@ const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
 });
 
-export const size = { width: 1280, height: 640 };
-
 export const GET = async (
     request: Request,
     { params }: { params: Promise<{ owner: string; repo: string }> }
@@ -93,7 +91,8 @@ export const GET = async (
             </div>
         ),
         {
-            ...size,
+            width: 1280,
+            height: 640,
         }
     );
 };
