@@ -14,6 +14,13 @@ WORKDIR /usr/src/app
 COPY --from=depends /usr/src/app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+
+ARG NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
+
 RUN bun run build
 
 
@@ -34,6 +41,12 @@ COPY --from=builder --chown=nextjs:nextjs /usr/src/app/next.config.mjs ./next.co
 COPY --from=builder --chown=nextjs:nextjs /usr/src/app/package.json ./package.json
 
 ENV NODE_ENV=production
+
+ARG NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
+
+ARG GITHUB_TOKEN
+ENV GITHUB_TOKEN=${GITHUB_TOKEN}
 
 # Exposting on port 80 so we can
 # access via a reverse proxy for Dokku
