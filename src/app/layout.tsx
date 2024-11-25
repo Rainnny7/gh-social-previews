@@ -17,7 +17,9 @@ const RootLayout = async ({
     children: ReactNode;
 }>): Promise<ReactElement> => (
     <html lang="en">
-        <body className={`scroll-smooth antialiased`}>{children}</body>
+        <body className="scroll-smooth antialiased select-none">
+            {children}
+        </body>
     </html>
 );
 export default RootLayout;
