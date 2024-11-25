@@ -9,7 +9,6 @@ const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
 });
 
-export const contentType = "image/png";
 export const size = { width: 1280, height: 640 };
 
 export const GET = async (
