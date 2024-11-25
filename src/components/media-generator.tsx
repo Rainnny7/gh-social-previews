@@ -5,6 +5,7 @@ import { BsMoonStars, BsSun } from "react-icons/bs";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { RiGitRepositoryLine, RiLoader4Line } from "react-icons/ri";
+import Link from "next/link";
 
 const MediaGenerator = (): ReactElement => {
     const [owner, setOwner] = useState<string>("Rainnny7");
@@ -14,7 +15,7 @@ const MediaGenerator = (): ReactElement => {
     const [transparent, setTransparent] = useState<boolean>(false);
 
     return (
-        <div className="w-full max-w-screen-lg md:h-82 flex flex-col md:flex-row justify-between bg-zinc-900/65 rounded-xl divide-y md:divide-x md:divide-y-0 divide-zinc-800">
+        <div className="w-full max-w-screen-xl flex flex-col md:flex-row justify-between bg-zinc-900/65 rounded-xl divide-y md:divide-x md:divide-y-0 divide-zinc-800">
             <Settings
                 owner={owner}
                 repo={repo}
@@ -115,7 +116,7 @@ const MediaPreview = ({
             <h1 className="text-xl font-semibold">Preview</h1>
 
             {/* Preview */}
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-1.5">
                 {(loading || errored) &&
                     (loading ? (
                         <RiLoader4Line className="mx-auto size-7 opacity-75 animate-spin" />
@@ -126,25 +127,35 @@ const MediaPreview = ({
                         </div>
                     ))}
                 {owner && repo && (
-                    <Image
-                        key={previewSource}
-                        className={cn("rounded-xl", errored && "hidden")}
-                        src={previewSource}
-                        alt="Generated social preview"
-                        width={532}
-                        height={532}
-                        draggable={false}
-                        onLoad={() => {
-                            setLoading(false);
-                            setErrored(false);
-                        }}
-                        onError={() => {
-                            setLoading(false);
-                            setErrored(true);
-                        }}
-                    />
+                    <>
+                        <Image
+                            key={previewSource}
+                            className={cn("rounded-xl", errored && "hidden")}
+                            src={previewSource}
+                            alt="Generated social preview"
+                            width={532}
+                            height={532}
+                            draggable={false}
+                            onLoad={() => {
+                                setLoading(false);
+                                setErrored(false);
+                            }}
+                            onError={() => {
+                                setLoading(false);
+                                setErrored(true);
+                            }}
+                        />
+                        {!errored && (
+                            <Link
+                                className="text-sm text-blue-500 hover:opacity-75 transition-all transform-gpu"
+                                href={previewSource}
+                            >
+                                {process.env.NEXT_PUBLIC_APP_URL}
+                                {previewSource}
+                            </Link>
+                        )}
+                    </>
                 )}
-                {/* TODO: Download */}
             </div>
         </div>
     );
@@ -181,6 +192,7 @@ const RepositoryInput = ({
                     className="w-full px-2 py-1.5 border text-white/85 border-zinc-800 rounded-lg"
                     placeholder="Repository Owner/Name"
                     value={inputValue}
+                    maxLength={50}
                     onChange={(event) => {
                         const value: string = event.target.value;
                         setInputValue(value);
