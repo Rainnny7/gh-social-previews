@@ -1,9 +1,9 @@
+import { cn } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 import { Octokit } from "octokit";
 import { ReactElement, ReactNode } from "react";
-import { IoStarOutline } from "react-icons/io5";
 import { GoIssueOpened, GoRepoForked } from "react-icons/go";
-import { cn } from "@/lib/utils";
+import { IoStarOutline } from "react-icons/io5";
 
 const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -82,15 +82,15 @@ export const GET = async (
                     {withStats && (
                         <div tw="flex items-center">
                             <Stat
-                                icon={<IoStarOutline size={28} />}
+                                icon={<IoStarOutline size={40} />}
                                 value={ghRepository?.stargazers_count}
                             />
                             <Stat
-                                icon={<GoIssueOpened size={28} />}
+                                icon={<GoIssueOpened size={40} />}
                                 value={ghRepository?.open_issues_count}
                             />
                             <Stat
-                                icon={<GoRepoForked size={28} />}
+                                icon={<GoRepoForked size={40} />}
                                 value={ghRepository?.forks_count}
                             />
                         </div>
@@ -114,6 +114,6 @@ const Stat = ({
 }): ReactElement => (
     <div tw="px-2 flex flex-col items-center">
         <div tw="flex pb-1.5">{icon}</div>
-        <span className="text-xl opacity-75">{value}</span>
+        <span className="text-3xl opacity-75">{value}</span>
     </div>
 );
